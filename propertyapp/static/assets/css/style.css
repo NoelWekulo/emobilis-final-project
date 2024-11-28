@@ -108,6 +108,176 @@ a:hover {
     color: #FFFFFF;
 }
 
+.blog-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.blog-search {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.search-button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.blog-item {
+  display: flex;
+  gap: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.blog-image {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.blog-info {
+  flex: 1;
+}
+
+.blog-info h2 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.blog-info h2 a:hover {
+  color: #007bff;
+}
+
+.blog-meta {
+  font-size: 14px;
+  color: #666;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+}
+
+.blog-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.blog-detail-container h1 {
+  font-size: 28px;
+  color: #333;
+}
+
+.blog-meta {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.blog-detail-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.blog-content {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.blog-category {
+  font-size: 14px;
+  color: #007bff;
+}
+
+.container {
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.card-body {
+  padding: 30px;
+  background: #f9f9f9;
+}
+
+h2 {
+  color: #007bff;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+.box-feature img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.box-feature h3 {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.learn-more {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.learn-more:hover {
+  text-decoration: underline;
+}
+
+
+
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }

@@ -19,7 +19,7 @@
               data-aos-delay="200"
             >
               <ol class="breadcrumb text-center justify-content-center">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'propertyapp:index' %}">Home</a></li>
                 <li
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
@@ -81,7 +81,7 @@
         <div class="row justify-content-between mb-5">
           <div class="col-lg-7 mb-5 mb-lg-0 order-lg-2">
             <div class="img-about dots">
-              <img src="images/hero_bg_3.jpg" alt="Image" class="img-fluid" />
+              <img src="{% static 'assets/images/hero_bg_3.jpg' %}" alt="Image" class="img-fluid" />
             </div>
           </div>
           <div class="col-lg-4">
@@ -133,7 +133,7 @@
         <div class="row justify-content-between mb-5">
           <div class="col-lg-7 mb-5 mb-lg-0">
             <div class="img-about dots">
-              <img src="images/hero_bg_2.jpg" alt="Image" class="img-fluid" />
+              <img src="{% static 'assets/images/hero_bg_2.jpg' %}" alt="Image" class="img-fluid" />
             </div>
           </div>
           <div class="col-lg-4">
@@ -183,13 +183,13 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-            <img src="images/img_1.jpg" alt="Image" class="img-fluid" />
+            <img src="{% static 'assets/images/img_1.jpg' %}" alt="Image" class="img-fluid" />
           </div>
           <div class="col-md-4 mt-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <img src="images/img_3.jpg" alt="Image" class="img-fluid" />
+            <img src="{% static 'assets/images/img_3.jpg' %}" alt="Image" class="img-fluid" />
           </div>
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-            <img src="images/img_2.jpg" alt="Image" class="img-fluid" />
+            <img src="{% static 'assets/images/img_2.jpg' %}" alt="Image" class="img-fluid" />
           </div>
         </div>
         <div class="row section-counter mt-5">
@@ -267,141 +267,41 @@
         </div>
         <div class="testimonial-slider-wrap">
           <div class="testimonial-slider">
-            <div class="item">
-              <div class="testimonial">
-                <img
-                  src="images/person_1-min.jpg"
-                  alt="Image"
-                  class="img-fluid rounded-circle w-25 mb-4"
-                />
-                <h3 class="h5 text-primary">James Smith</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
 
-                <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
-                </p>
-
-                <ul class="social list-unstyled list-inline dark-hover">
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-twitter"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-facebook"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-linkedin"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-instagram"></span></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            {% for Team in teams %}
 
             <div class="item">
               <div class="testimonial">
                 <img
-                  src="images/person_2-min.jpg"
+                  src="/media/{{Team.image}}"
                   alt="Image"
                   class="img-fluid rounded-circle w-25 mb-4"
                 />
-                <h3 class="h5 text-primary">Carol Houston</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
+                <h3 class="h5 text-primary">{{Team.name}}</h3>
+                <p class="text-black-50">{{Team.position}}</p>
 
                 <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
+                  {{Team.bio}}
                 </p>
 
                 <ul class="social list-unstyled list-inline dark-hover">
                   <li class="list-inline-item">
-                    <a href="#"><span class="icon-twitter"></span></a>
+                    <a href="{{Team.twitter_url}}"><span class="icon-twitter"></span></a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#"><span class="icon-facebook"></span></a>
+                    <a href="{{Team.facebook_url}}"><span class="icon-facebook"></span></a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#"><span class="icon-linkedin"></span></a>
+                    <a href="{{Team.linkedin_url}}"><span class="icon-linkedin"></span></a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#"><span class="icon-instagram"></span></a>
+                    <a href="{{Team.instagram_url}}"><span class="icon-instagram"></span></a>
                   </li>
                 </ul>
               </div>
             </div>
+            {% endfor %}
 
-            <div class="item">
-              <div class="testimonial">
-                <img
-                  src="images/person_3-min.jpg"
-                  alt="Image"
-                  class="img-fluid rounded-circle w-25 mb-4"
-                />
-                <h3 class="h5 text-primary">Synthia Cameron</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
-
-                <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
-                </p>
-
-                <ul class="social list-unstyled list-inline dark-hover">
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-twitter"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-facebook"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-linkedin"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-instagram"></span></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="item">
-              <div class="testimonial">
-                <img
-                  src="images/person_4.jpg"
-                  alt="Image"
-                  class="img-fluid rounded-circle w-25 mb-4"
-                />
-                <h3 class="h5 text-primary">Davin Smith</h3>
-                <p class="text-black-50">Designer, Co-founder</p>
-
-                <p>
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                  Separated they live in Bookmarksgrove right at the coast of
-                  the Semantics, a large language ocean.
-                </p>
-
-                <ul class="social list-unstyled list-inline dark-hover">
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-twitter"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-facebook"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-linkedin"></span></a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#"><span class="icon-instagram"></span></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </div>

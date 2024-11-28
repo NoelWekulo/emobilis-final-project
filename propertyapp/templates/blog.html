@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block title %}Blog{% endblock %}
+
 {% block content %}
 
     <div
@@ -33,4 +35,41 @@
       </div>
     </div>
 
+  
+    
+   <!-- Blog Section -->
+
+
+<div class="blog-container">
+    <h1>Our Blog</h1>
+    <form method="get" action="{% url 'propertyapp:blog' %}" class="blog-search">
+        <input type="text" name="q" placeholder="Search blogs..." value="{{ query }}" class="search-input">
+        <button type="submit" class="search-button">Search</button>
+    </form>
+    <div class="blog-list">
+        {% for blog in page_obj %}
+        <div class="blog-item">
+            {% if blog.featured_image %}
+            <img src="{{ blog.featured_image.url }}" alt="{{ blog.title }}" class="blog-image">
+            {% endif %}
+            <div class="blog-info">
+                <h2><a href="{% url 'blog_detail' blog.slug %}">{{ blog.title }}</a></h2>
+                <p class="blog-meta">By {{ blog.author.username }} | {{ blog.created_at|date:"F d, Y" }}</p>
+                <p class="blog-excerpt">{{ blog.content|slice:200 }}...</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
