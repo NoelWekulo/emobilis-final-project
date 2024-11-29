@@ -81,6 +81,19 @@ var tns = (function (){
   return docOverflow;
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  var slider = tns({
+      container: '.property-slider',
+      items: 3,
+      slideBy: 'page',
+      autoplay: true,
+      controls: true,
+      controlsContainer: '#property-nav',
+      nav: false,
+  });
+});
+
+
 function resetFakeBody (body, docOverflow) {
   if (body.fake) {
     body.remove();

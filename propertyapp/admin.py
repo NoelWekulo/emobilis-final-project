@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Blog, BlogCategory,Property,Testimonial,Agent,Service,AgentApplication,ContactInfo, Message,Team
+from .models import (
+    Blog, BlogCategory,Property,
+    Testimonial,Agent,Service,AgentApplication,ContactInfo, Message,Team,PropertyImage
+)
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
@@ -34,5 +37,6 @@ class PropertyAdmin(admin.ModelAdmin):
 admin.site.register(Testimonial)
 admin.site.register(Agent)
 admin.site.register(Team)
+admin.site.register(PropertyImage)
 
 admin.site.register(AgentApplication)

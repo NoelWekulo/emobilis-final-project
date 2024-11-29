@@ -10,8 +10,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('about', views.about, name='about'),
     path('properties', views.properties, name='properties'),
-    path('contact/', views.contact, name='contact'),
-    path('propertySingle', views.propertySingle, name='propertySingle'),
+    path('contact/', views.contact, name='contact'), 
+    path('property-single', views.propertysingle, name='property-single'),
     path('services', views.services, name='services'),
     path('blog', views.blog, name='blog'),
     path('agent', views.agent, name='agent'),
@@ -22,6 +22,9 @@ urlpatterns = [
     path('blog/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('apply-agent/', views.apply_agent, name='apply_agent'),
     path('property/<int:pk>/', views.property_single, name='property_single'),
+    path('Property/<int:pk>/', views.property_single, name='property_single'),
+    path('property-single', views.property_single, name='property-single'),
+
 
 
     path('blog/category/<slug:category_slug>/', views.blog_list, name='blog_by_category'),  # Filter blogs by category

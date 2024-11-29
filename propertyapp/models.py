@@ -36,7 +36,7 @@ class Property(models.Model):
     location = models.CharField(max_length=100)
     bedrooms = models.IntegerField()
     bathrooms = models.IntegerField()
-    image = models.ImageField(upload_to='properties/')
+    image = models.ImageField(upload_to='properties/', default='properties/default.jpg')
     featured = models.BooleanField(default=False)  # Mark as featured
     agent_name = models.CharField(max_length=100)
     agent_image = models.ImageField(upload_to='agents/')
@@ -48,8 +48,15 @@ class Property(models.Model):
 
     def __str__(self):
         return self.title
+    
 
-
+class PropertyImage(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='property_images/')
+    
+    def __str__(self):
+        return f"Property Image for {self.property.title}"
+    
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
     designation = models.CharField(max_length=100)

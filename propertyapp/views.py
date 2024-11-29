@@ -1,5 +1,9 @@
 from django.shortcuts import render,redirect
-from .models import Testimonial,Property,Agent,Blog,BlogCategory,AgentApplication,ContactInfo, Message,Service,Team
+from .models import (
+    Testimonial,Property,Agent,Blog,BlogCategory,
+    AgentApplication,ContactInfo, Message,Service,Team,PropertyImage
+)
+
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse
@@ -11,11 +15,13 @@ from django.contrib import messages
 
 def index(request):
 
+
     testimonials = Testimonial.objects.all()
     for testimonial in testimonials:
         testimonial.stars = range(testimonial.rating)  # Add a stars property
 
-    featured_properties = Property.objects.filter(featured=True)[:5]
+    featured_properties = Property.objects.filter(featured=True)[:10]
+    
     agents = Agent.objects.all()[:5]
     recent_blogs = Blog.objects.all()[:3]
 
@@ -25,9 +31,11 @@ def index(request):
         'agents': agents,
         'blogs': recent_blogs,
     })
+
 def property_single(request, pk):
-    property_detail = get_object_or_404(Property, pk=pk)  # Fetch property by primary key
-    return render(request, 'property-single.html', {'property': property_detail})
+    property = get_object_or_404(Property, pk=pk)
+    propertyimages = PropertyImage.objects.filter(property= property)
+    return render(request, 'property-single.html', {'property': property, 'propertyimages':propertyimages})
 def apply_agent(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -47,7 +55,7 @@ def contact(request):
         message_text = request.POST['message']
         Message.objects.create(name=name, email=email, subject=subject, message=message_text)
         messages.success(request, 'Your message has been sent successfully!')
-        # return redirect('contact')
+        return redirect('/contact/')
     return render(request, 'contact.html', {'contact_info': contact_info})
 
 
@@ -87,8 +95,8 @@ def buy(request):
 def sale(request):
     return render(request, 'sale.html')
 
-def propertySingle(request):
-    return render(request, 'propertySingle.html')
+def propertysingle(request):
+    return render(request, 'property-single.html')
 def blog(request):
     return render(request, 'blog.html')
 def agent(request):
@@ -99,4 +107,9 @@ def agent(request):
 def listing(request):
     return render(request, 'listing.html')
 def properties(request):
-    return render(request, 'properties.html')
+    properties = Property.objects.all()
+    featured_properties = Property.objects.filter(featured=True)[:10]
+    return render(request, 'properties.html', {
+        'featured_properties': featured_properties,
+        'properties': properties,
+    })
