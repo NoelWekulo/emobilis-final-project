@@ -12,30 +12,32 @@ from django.contrib import messages
 
 
 # Create your views here.
-
-def index(request):
-
-
+def common_data():
+    categories = BlogCategory.objects.all()
     testimonials = Testimonial.objects.all()
     for testimonial in testimonials:
         testimonial.stars = range(testimonial.rating)  # Add a stars property
-
-    featured_properties = Property.objects.filter(featured=True)[:10]
     
+    return {
+        'testimonials': testimonials,
+        'categories': categories,
+    }
+def index(request):
+    featured_properties = Property.objects.filter(featured=True)[:10]
     agents = Agent.objects.all()[:5]
-    recent_blogs = Blog.objects.all()[:3]
+    recent_blogs = Blog.objects.all().order_by("-created_at")[:3]
 
     return render(request, 'index.html', {
         'featured_properties': featured_properties,
-        'testimonials': testimonials,
         'agents': agents,
         'blogs': recent_blogs,
+        **common_data()
     })
 
 def property_single(request, pk):
     property = get_object_or_404(Property, pk=pk)
     propertyimages = PropertyImage.objects.filter(property= property)
-    return render(request, 'property-single.html', {'property': property, 'propertyimages':propertyimages})
+    return render(request, 'property-single.html', {'property': property, 'propertyimages':propertyimages,  **common_data()})
 def apply_agent(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -44,7 +46,7 @@ def apply_agent(request):
         message = request.POST['message']
         AgentApplication.objects.create(name=name, email=email, phone=phone, message=message)
         return HttpResponse("Application submitted successfully!")
-    return render(request, 'apply_agent.html')
+    return render(request, 'apply_agent.html',)
 
 def contact(request):
     contact_info = ContactInfo.objects.first()  # Assuming one contact info object
@@ -56,14 +58,14 @@ def contact(request):
         Message.objects.create(name=name, email=email, subject=subject, message=message_text)
         messages.success(request, 'Your message has been sent successfully!')
         return redirect('/contact/')
-    return render(request, 'contact.html', {'contact_info': contact_info})
+    return render(request, 'contact.html', {'contact_info': contact_info,  **common_data()})
 
 
 
 
-def blog_list(request, category_slug=None):
-    if category_slug:
-        category = get_object_or_404(BlogCategory, slug=category_slug)
+def blog_list(request, slug=None):
+    if slug:
+        category = get_object_or_404(BlogCategory, slug=slug)
         blogs = Blog.objects.filter(category=category)
     else:
         blogs = Blog.objects.all()
@@ -73,25 +75,23 @@ def blog_list(request, category_slug=None):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'blog.html', {'page_obj': page_obj, 'category': category_slug})
+    return render(request, 'blog.html', {'page_obj': page_obj, 'category': slug,   **common_data()})
 
 
 def blog_detail(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    return render(request, 'blog_detail.html', {'blog': blog})
+    return render(request, 'blog_detail.html', {'blog': blog,  **common_data()})
 
 def services(request):
     services = Service.objects.all()
-    testimonials = Testimonial.objects.all()
-    for testimonial in testimonials:
-        testimonial.stars = range(testimonial.rating)  # Add a stars property
-    return render(request, 'services.html', {'services': services,'testimonials': testimonials})
+
+    return render(request, 'services.html', {'services': services,  **common_data()})
 
 def about(request):
     teams = Team.objects.all()
-    return render(request, 'about.html', {'teams': teams})
+    return render(request, 'about.html', {'teams': teams,  **common_data()})
 def buy(request):
-    return render(request, 'buy.html')
+    return render(request, 'buy.html', {**common_data()})
 def sale(request):
     return render(request, 'sale.html')
 
@@ -101,7 +101,7 @@ def blog(request):
     return render(request, 'blog.html')
 def agent(request):
     agents = Agent.objects.all()[:5]
-    return render(request, 'agent.html', {'agents': agents})
+    return render(request, 'agent.html', {'agents': agents,  **common_data()})
 
 
 def listing(request):
@@ -111,5 +111,6 @@ def properties(request):
     featured_properties = Property.objects.filter(featured=True)[:10]
     return render(request, 'properties.html', {
         'featured_properties': featured_properties,
-        'properties': properties,
+        'properties': properties, 
+        **common_data()
     })
