@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+
+ {% block content %}
+
+ <div
+ class="hero page-inner overlay"
+ style="background-image: url('{% static "assets/images/properties.jpg" %}')"
+>
+ <div class="container">
+   <div class="row justify-content-center align-items-center">
+     <div class="col-lg-9 text-center mt-5">
+       <h1 class="heading" data-aos="fade-up">All Listings</h1>
+
+       <nav
+         aria-label="breadcrumb"
+         data-aos="fade-up"
+         data-aos-delay="200"
+       >
+         <ol class="breadcrumb text-center justify-content-center">
+           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+           <li
+             class="breadcrumb-item active text-white-50"
+             aria-current="page"
+           >
+             All Listings
+           </li>
+         </ol>
+       </nav>
+     </div>
+   </div>
+ </div>
+</div>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card shadow border-0">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">
+                        {% if category %}
+                            {{ category|capfirst }} Listings
+                        {% else %}
+                            All Property Listings
+                        {% endif %}
+                    </h2>
+                    <div class="mb-4 text-center">
+                      <a href="{% url 'propertyapp:listings' %}" class="btn btn-secondary btn-sm {% if not category %}active{% endif %}">All</a>
+                      <a href="{% url 'propertyapp:listings_by_category' 'land' %}" class="btn btn-secondary btn-sm {% if category == 'land' %}active{% endif %}">Land</a>
+                      <a href="{% url 'propertyapp:listings_by_category' 'apartment' %}" class="btn btn-secondary btn-sm {% if category == 'apartment' %}active{% endif %}">Apartment</a>
+                      <a href="{% url 'propertyapp:listings_by_category' 'house' %}" class="btn btn-secondary btn-sm {% if category == 'house' %}active{% endif %}">House</a>
+                      <a href="{% url 'propertyapp:listings_by_category' 'commercial' %}" class="btn btn-secondary btn-sm {% if category == 'commercial' %}active{% endif %}">Commercial</a>
+                      
+                    </div>
+                    <div class="row">
+                        {% for property in properties %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="{{ property.image.url }}" class="card-img-top" alt="{{ property.title }}" style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ property.title }}</h5>
+                                    <p class="card-text text-muted">{{ property.description|truncatewords:20 }}</p>
+                                    <p><strong>Category:</strong> {{ property.get_category_display }}</p>
+                                    <p><strong>Price:</strong> ${{ property.price|default:"N/A" }}</p>
+                                    <p><strong>Location:</strong> {{ property.location }}</p>
+                                </div>
+                                <div class="card-footer bg-white border-0 text-end">
+                                    <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-center">No properties found.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+   {% endblock content %}

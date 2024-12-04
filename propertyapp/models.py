@@ -3,51 +3,47 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-# # class Property(models.Model):
-#     PROPERTY_TYPE_CHOICES = [
-#         ('apartment', 'Apartment'),
-#         ('home', 'Home'),
-#         ('land', 'Land'),
-#         ('suite', 'Suite'),
-#         ('shop', 'Shop'),
-#         ('mall', 'Mall'),
-#     ]
-#     address = models.CharField(max_length=200)
-#     price = models.DecimalField(max_digits=10, decimal_places=2)
-#     location = models.CharField(max_length=200)
-#     icon = models.CharField(max_length=50) 
-#     image = models.ImageField(upload_to='properties/')
-#     property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES)
-#     status = models.CharField(max_length=20, choices=[('buy', 'Buy'), ('sell', 'Sell')])
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     featured = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return self.title
-
-
-from django.db import models
-
 class Property(models.Model):
+    PROPERTY_TYPES = [
+        ('buy', 'Buy'),  # Properties to buy
+        ('sell', 'Sell'),  # Properties to sell
+        ('listings', 'Listings'),  # General listings (organized by category)
+    ]
+
+    CATEGORIES = [
+        ('land', 'Land'),
+        ('apartment', 'Apartment'),
+        ('home', 'Home'),
+        ('mall', 'Mall'),
+    ]
+    
+    
+
     title = models.CharField(max_length=200)
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    address = models.CharField(max_length=255)
+    long_description = models.TextField(blank=True, null=True)  # Detailed property description
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # Optional for listings
+    address = models.CharField(max_length=255, blank=True, null=True)  # Optional for certain categories
     location = models.CharField(max_length=100)
-    bedrooms = models.IntegerField()
-    bathrooms = models.IntegerField()
+    bedrooms = models.IntegerField(blank=True, null=True)  # Optional for certain categories
+    bathrooms = models.IntegerField(blank=True, null=True)  # Optional for certain categories
     image = models.ImageField(upload_to='properties/', default='properties/default.jpg')
+    property_type = models.CharField(choices=PROPERTY_TYPES, max_length=10, default='Listings')
+    
+    category = models.CharField(choices=CATEGORIES, max_length=20, blank=True, null=True)  # Only used if type is 'listings'
     featured = models.BooleanField(default=False)  # Mark as featured
-    agent_name = models.CharField(max_length=100)
-    agent_image = models.ImageField(upload_to='agents/')
-    agent_description = models.TextField()
-    twitter_url = models.CharField(max_length=55,blank=True,null=True)
-    facebook_url = models.CharField(max_length=55,blank=True,null=True)
-    linkedin_url = models.CharField(max_length=55,blank=True,null=True)
-    instagram_url = models.CharField(max_length=55,blank=True,null=True)
+    agent_name = models.CharField(max_length=100, blank=True, null=True)  # Optional for listings
+    agent_image = models.ImageField(upload_to='agents/', blank=True, null=True)  # Optional for listings
+    agent_description = models.TextField(blank=True, null=True)  # Optional for listings
+    twitter_url = models.CharField(max_length=55, blank=True, null=True)
+    facebook_url = models.CharField(max_length=55, blank=True, null=True)
+    linkedin_url = models.CharField(max_length=55, blank=True, null=True)
+    instagram_url = models.CharField(max_length=55, blank=True, null=True)
 
     def __str__(self):
         return self.title
+
+
     
 
 class PropertyImage(models.Model):
@@ -162,6 +158,15 @@ class AgentApplication(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default.jpg')
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
 
 
 

@@ -61,7 +61,7 @@
       <div class="col-lg-6 text-lg-end">
         <p>
           <a
-            href="#"
+            href="{% url 'propertyapp:properties' %}"
             target="_blank"
             class="btn btn-primary text-white py-3 px-4"
             >View all properties</a
@@ -166,7 +166,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Voluptates, accusamus.
               </p>
-              <p><a href="{% url 'propertyapp:sale' %}" class="learn-more">Learn More</a></p>
+              <p><a href="{% url 'propertyapp:sell_property' %}" class="learn-more">Learn More</a></p>
             </div>
           </div>
           <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
@@ -188,7 +188,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Voluptates, accusamus.
               </p>
-              <p><a href="{% url 'propertyapp:buy' %}" class="learn-more">Learn More</a></p>
+              <p><a href="{% url 'propertyapp:buy_properties' %}" class="learn-more">Learn More</a></p>
             </div>
           </div>
         </div>

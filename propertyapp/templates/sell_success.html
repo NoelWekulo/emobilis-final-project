@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}Property Submitted{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center">
+        <h1 class="text-success">Property Submitted Successfully!</h1>
+        <p>Thank you for listing your property with us. It will appear on the site shortly.</p>
+        <a href="{% url 'propertyapp:listings' %}" class="btn btn-primary">View Listings</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}All Blogs{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Our Blogs</h1>
+    <div class="row">
+        {% for blog in blogs %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ blog.featured_image.url }}" class="card-img-top" alt="{{ blog.title }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog.title }}</h5>
+                    <p class="card-text">{{ blog.content|truncatewords:20 }}</p>
+                    <a href="{% url 'propertyapp:blog_detail' blog.slug %}" class="btn btn-primary btn-sm">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No blogs available at the moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Untree.co" />
-    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
@@ -47,7 +47,9 @@
       <div class="container">
         <div class="menu-bg-wrap">
           <div class="site-navigation">
-            <a href="{% url 'propertyapp:index' %}" class="logo m-0 float-start">Property</a>
+            <a href="{% url 'propertyapp:index' %}" class="logo m-0 float-start">
+              <img src="{% static 'assets/images/domina logo.png' %}" alt="Domina Homes Logo" style="height: 100px;">
+            </a>
 
             <ul
               class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
@@ -56,24 +58,15 @@
               <li class="has-children">
                 <a href="{% url 'propertyapp:properties' %}">Properties</a>
                 <ul class="dropdown">
-                  <li><a href="#">Buy Property</a></li>
-                  <li><a href="#">Sell Property</a></li>
-                  <li class="has-children">
-                    <a href="{% url 'propertyapp:listing' %}">Listing</a>
-                    <ul class="dropdown">
-                      <li><a href="#">Apartments</a></li>
-                      <li><a href="#">Lands</a></li>
-                      <li><a href="#">Homes</a></li>
-                      <li><a href="#">Suites</a></li>
-                      <li><a href="#">Shops/malls</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="{% url 'propertyapp:buy_properties' %}">Buy Property</a></li>
+                  <li><a href="{% url 'propertyapp:sell_property' %}">Sell Property</a></li>
+                  <li><a href="{% url 'propertyapp:listings' %}">Listing</a></li>
                 </ul>
               </li>
               <li><a href="{% url 'propertyapp:services' %}">Services</a></li>
               <li><a href="{% url 'propertyapp:about' %}">About</a></li>
               <li class="has-children">
-                <a href="#">Blog</a>
+                <a href="{% url 'propertyapp:blog' %}">Blog</a>
                 <ul class="dropdown">
                   
                   {% for category in categories  %}
@@ -85,6 +78,23 @@
               </li>
               <li><a href="{% url 'propertyapp:agent' %}">Agent</a></li>
               <li><a href="{% url 'propertyapp:contact' %}">Contact Us</a></li>
+              {% if user.is_authenticated %}
+          <!-- Logged-in User Section -->
+          <li class="has-children">
+            <a href="{% url 'propertyapp:profile' %}">
+              <img src="{{ user.profile.picture.url|default:'{% static "assets/images/default-profile.png" %}' }}" alt="Profile" style="height: 40px; width: 40px; border-radius: 50%; vertical-align: middle;">
+              {{ user.username }}
+            </a>
+            <ul class="dropdown">
+              <li><a href="{% url 'propertyapp:password_change' %}">Change Password</a></li>
+              <li><a href="{% url 'propertyapp:logout' %}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <!-- Guest User Section -->
+          <li><a href="{% url 'propertyapp:login' %}">Login</a></li>
+          <li><a href="{% url 'propertyapp:register' %}">Register</a></li>
+          {% endif %}
             </ul>
 
             <a
