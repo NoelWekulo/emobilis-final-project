@@ -11,12 +11,14 @@ from .forms import ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 # Create your views here.
 def common_data():
     categories = BlogCategory.objects.all()
     testimonials = Testimonial.objects.all()
+    #  if request.user.is_authenticated:
     for testimonial in testimonials:
         testimonial.stars = range(testimonial.rating)  # Add a stars property
     
@@ -208,3 +210,6 @@ def profile(request):
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
     return render(request, 'accounts/profile.html', {'form': form})
+def logout_user(request):
+    logout(request)
+    return redirect('/')

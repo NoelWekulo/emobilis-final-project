@@ -43,7 +43,7 @@
       <div class="site-mobile-menu-body"></div>
     </div>
 
-    <nav class="site-nav">
+    <nav class="site-nav mb-6">
       <div class="container">
         <div class="menu-bg-wrap">
           <div class="site-navigation">
@@ -86,14 +86,14 @@
               {{ user.username }}
             </a>
             <ul class="dropdown">
-              <li><a href="{% url 'propertyapp:password_change' %}">Change Password</a></li>
+              <li><a href="/password_change/">Change Password</a></li>
               <li><a href="{% url 'propertyapp:logout' %}">Logout</a></li>
             </ul>
           </li>
           {% else %}
           <!-- Guest User Section -->
-          <li><a href="{% url 'propertyapp:login' %}">Login</a></li>
-          <li><a href="{% url 'propertyapp:register' %}">Register</a></li>
+          <li><a href="/login/">Login</a></li>
+          <li><a href="/register/">Register</a></li>
           {% endif %}
             </ul>
 
