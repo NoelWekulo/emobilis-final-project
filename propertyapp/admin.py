@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     Blog, BlogCategory,Property,
-    Testimonial,Agent,Service,AgentApplication,ContactInfo, Message,Team,PropertyImage
+    Testimonial,Agent,Service,AgentApplication,ContactInfo, Message,Team,PropertyImage,Profile
 )
 
 @admin.register(Blog)
@@ -40,3 +40,4 @@ admin.site.register(Team)
 admin.site.register(PropertyImage)
 
 admin.site.register(AgentApplication)
+admin.site.register(Profile)

@@ -82,7 +82,7 @@
           <!-- Logged-in User Section -->
           <li class="has-children">
             <a href="{% url 'propertyapp:profile' %}">
-              <img src="{{ user.profile.picture.url|default:'{% static "assets/images/default-profile.png" %}' }}" alt="Profile" style="height: 40px; width: 40px; border-radius: 50%; vertical-align: middle;">
+              <img src="{{profile.picture.url}}" alt="Profile" style="height: 40px; width: 40px; border-radius: 50%; vertical-align: middle;">
               {{ user.username }}
             </a>
             <ul class="dropdown">
@@ -110,11 +110,11 @@
       </div>
     </nav>
 
-    <main class="container mt-5 pt-5">
+    
         {% block content %}
         <!-- Child templates will replace this content -->
         {% endblock content %}
-      </main>
+    
 
 
     <div class="site-footer">
