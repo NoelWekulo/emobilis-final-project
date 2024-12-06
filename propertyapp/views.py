@@ -6,14 +6,10 @@ from .models import (
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-from .forms import ProfileUpdateForm
-
+from .forms import ProfileUpdateForm,RegistrationForm
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-
-from django.contrib.auth.models import User
+from django.contrib.auth import logout,login
 
 
 # Create your views here.
@@ -47,7 +43,7 @@ def index(request):
 def property_single(request, pk):
     property = get_object_or_404(Property, pk=pk)
     propertyimages = PropertyImage.objects.filter(property= property)
-    return render(request, 'property-single.html', {'property': property, 'propertyimages':propertyimages,  **common_data()})
+    return render(request, 'property-single.html', {'property': property, 'propertyimages':propertyimages,  **common_data(request)})
 def apply_agent(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -106,7 +102,7 @@ def sale(request):
     return render(request, 'sale.html', {**common_data(request)})
 
 def propertysingle(request):
-    return render(request, 'property-single.html', {**common_data(request)})
+    return render(request, 'property-single.html',{**common_data(request)})
 def blog(request):
     blogs = Blog.objects.all()
      # Paginate blogs: 5 per page
@@ -189,20 +185,21 @@ def listings(request, category=None):
         properties = Property.objects.filter(property_type='listings', category=category)
     else:
         properties = Property.objects.filter(property_type='listings')
-    return render(request, 'listings.html', {'properties': properties, 'category': category })
+    return render(request, 'listings.html', {'properties': properties, 'category': category, **common_data(request) })
 
 def register(request):
-    #Handle user registration.
+    form = RegistrationForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        print(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}! You can now log in.')
-            return redirect('login')
-    else:
-        form = UserCreationForm()
-    return render(request, 'accounts/register.html', {'form': form, })
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have singed up successfully.')
+            login(request, user)
+            return redirect('/')
+    return render(request, 'accounts/register.html', {'form': form,**common_data(request) })
 
 
 # def register(request):
@@ -255,7 +252,7 @@ def profile(request):
             return redirect('propertyapp:profile')  # Redirect to the profile page after saving
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
-    return render(request, 'accounts/profile.html', {'form': form, })
+    return render(request, 'accounts/profile.html', {'form': form,**common_data(request) })
 def logout_user(request):
     logout(request)
     return redirect('/')
