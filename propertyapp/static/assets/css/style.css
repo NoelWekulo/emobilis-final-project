@@ -1,7 +1,7 @@
 
 :root {
   --primary-color: #001F3F; /* Navy Blue */
-  --secondary-color: #3D9970; /* Accent Teal */
+  --secondary-color: black; /* Accent Teal */
   --background-light: #F8F9FA; /* Background color */
   --text-dark: #333333; /* Main Text Color */
   --text-light: #FFFFFF; /* Text on Dark Backgrounds */
@@ -103,8 +103,87 @@ a:hover {
     color: #FFFFFF; /* White */
 }
 
+
+.card_apply {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card_apply:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.card-body_apply {
+  padding: 2.5rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+  border: 1px solid var(--input-border-color);
+  color: #6c757d;
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.5);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+@media (max-width: 576px) {
+  .card-body {
+      padding: 1.5rem;
+  }
+}
+
 .hero .form-search .btn-primary:hover {
-    background-color: #006666; /* Slightly Darker Teal */
+    background-color: var(--blue); /* Slightly Darker Teal */
     color: #FFFFFF;
 }
 
@@ -9879,7 +9958,12 @@ textarea.form-control-lg {
   position: absolute;
   top: 0;
   z-index: 9;
-  width: 100%; }
+  width: 100%; 
+  
+}
+
+
+
   .site-nav h1, .site-nav .h1 {
     margin: 0;
     padding: 0;
@@ -9894,6 +9978,8 @@ textarea.form-control-lg {
         display: inline-block;
         text-decoration: none !important;
         color: rgba(255, 255, 255, 0.5); }
+
+
         .site-nav .site-navigation .site-menu > li > a:hover {
           color: #fff; }
       .site-nav .site-navigation .site-menu > li.cta-button a {
