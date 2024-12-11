@@ -21,6 +21,7 @@ urlpatterns = [
     path('listings/', views.listings, name='listings'),  # All listings
     path('listings/<str:category>/', views.listings, name='listings_by_category'),
     path('sell_success/', views.sell_success, name='sell_success'),
+    path('search_result/', views.search_result, name='search_result'),
     
     
     path('blogs/', views.blog_list, name='blog_list'),  # List all blogs

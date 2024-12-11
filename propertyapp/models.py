@@ -68,7 +68,7 @@ class Testimonial(models.Model):
 
 class Agent(models.Model):
     name = models.CharField(max_length=100)
-    position = models.CharField(max_length=15)
+    position = models.CharField(max_length=100)
     image = models.ImageField(upload_to='agents/', default="profile.png")
     bio = models.TextField()
     twitter_url = models.CharField(max_length=55,blank=True,null=True)
@@ -81,7 +81,7 @@ class Agent(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
-    position = models.CharField(max_length=15)
+    position = models.CharField(max_length=100)
     image = models.ImageField(upload_to='team/', default="profile.png")
     bio = models.TextField()
     twitter_url = models.CharField(max_length=55,blank=True,null=True)

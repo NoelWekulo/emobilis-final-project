@@ -10,6 +10,7 @@ from .forms import ProfileUpdateForm,RegistrationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,login
+from django.db.models import Q
 
 
 # Create your views here.
@@ -187,6 +188,17 @@ def listings(request, category=None):
         properties = Property.objects.filter(property_type='listings')
     return render(request, 'listings.html', {'properties': properties, 'category': category, **common_data(request) })
 
+def search_result(request):
+
+    # Get search query from the request
+    search_query = request.GET.get('query')
+    # Filter properties based on search query
+    properties = Property.objects.filter(
+        Q(title__icontains=search_query) |
+        Q(description__icontains=search_query) |
+        Q(location__icontains=search_query)
+    )
+    return render(request,'listings.html', {'properties': properties,'search_query': search_query, **common_data(request) })
 def register(request):
     form = RegistrationForm()
     if request.method == 'POST':

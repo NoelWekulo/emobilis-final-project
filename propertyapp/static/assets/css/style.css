@@ -14,7 +14,7 @@
   --yellow: #ffc107; /* Retained */
   --green: #20a744; /* Slightly adjusted green */
   --teal: #20c997; /* Retained */
-  --cyan: #138496; /* A darker cyan */
+  --cyan: #04444e; /* A darker cyan */
   --white: #ffffff; /* Pure white */
   --gray: #6c757d; /* Retained */
   --gray-dark: #495057; /* Slightly lighter dark gray */
@@ -153,7 +153,7 @@ a:hover {
 }
 
 .btn-primary {
-  background-color: var(--secondary-color);
+  background-color: var(--blue);
   border: none;
   padding: 0.75rem 1.5rem;
   font-weight: 600;
