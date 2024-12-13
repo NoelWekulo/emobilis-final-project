@@ -50,8 +50,8 @@
                       <a href="{% url 'propertyapp:listings' %}" class="btn btn-secondary btn-sm {% if not category %}active{% endif %}">All</a>
                       <a href="{% url 'propertyapp:listings_by_category' 'land' %}" class="btn btn-secondary btn-sm {% if category == 'land' %}active{% endif %}">Land</a>
                       <a href="{% url 'propertyapp:listings_by_category' 'apartment' %}" class="btn btn-secondary btn-sm {% if category == 'apartment' %}active{% endif %}">Apartment</a>
-                      <a href="{% url 'propertyapp:listings_by_category' 'house' %}" class="btn btn-secondary btn-sm {% if category == 'house' %}active{% endif %}">House</a>
-                      <a href="{% url 'propertyapp:listings_by_category' 'commercial' %}" class="btn btn-secondary btn-sm {% if category == 'commercial' %}active{% endif %}">Commercial</a>
+                      <a href="{% url 'propertyapp:listings_by_category' 'home' %}" class="btn btn-secondary btn-sm {% if category == 'house' %}active{% endif %}">Home</a>
+                      <a href="{% url 'propertyapp:listings_by_category' 'mall' %}" class="btn btn-secondary btn-sm {% if category == 'commercial' %}active{% endif %}">Malls/Shops</a>
                       
                     </div>
                     <div class="row">
